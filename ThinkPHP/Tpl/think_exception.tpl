@@ -50,8 +50,5 @@ h1{ font-size: 32px; line-height: 48px; }
 <?php }?>
 </div>
 </div>
-<div class="copyright">
-<p><a title="技术支持" href="http://localhost/futures">futures</a><sup>1.0</sup> </p>
-</div>
 </body>
 </html>

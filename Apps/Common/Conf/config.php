@@ -12,6 +12,10 @@ return array(
 	//'配置项'=>'配置值'
 	'SHOW_PAGE_TRACE' =>true,
 	
+	 //默认模块
+	'DEFAULT_MODULE'     => 'Home',
+	'URL_MODEL'          => '2', //URL模式
+	
 	//默认主题
 	'DEFAULT_THEME' => DEFAULT_THEME,
 	
