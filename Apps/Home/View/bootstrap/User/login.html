@@ -31,13 +31,19 @@
 
     <div class="container">
 
-      <form class="form-signin" role="form">
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <input type="email" class="form-control" placeholder="Email" required autofocus>
-        <input type="password" class="form-control" placeholder="密码" required>
+      <form class="form-signin" role="form" method="POST">
+        <h2 class="form-signin-heading">请登录</h2>
+        <foreach name="errorinfo" item="error" >
+        	<span style="color:red" >{$error}</span><br />
+        </foreach>
+        <input type="email" class="form-control" placeholder="Email" name="email" value="{$post.email}" required autofocus>
+        <input type="text" class="form-control" placeholder="用户名" name="username" value="{$post.username}" required autofocus>
+        <input type="password" class="form-control" placeholder="密码" name="password" required>
+        <input type="text" class="form-control" placeholder="请输入验证码" name="verify" required>
+        <img src="verify" onClick="this.src=this.src+'?'+Math.random()" >
         <div class="checkbox">
           <label>
-            <input type="checkbox" value="remember-me"> Remember me
+            <input type="checkbox" value="1" name="remember" value="{$post.remember}"> Remember me
           </label>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
