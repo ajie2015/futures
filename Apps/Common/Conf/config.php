@@ -1,5 +1,7 @@
 <?php
 define('DEFAULT_THEME','bootstrap');	//default,nt,media,bootstrap
+//define('__PUBLIC__',__ROOT__.'/Public');
+define('__PUBLIC__',SITE_PATH.'/Public');
 return array(
 	/** apps应用下面有home模块和admin模块
 		本文件为两模块公共配置文件，私有配置进入模块下配置
@@ -25,7 +27,7 @@ return array(
 	
 	//路径替换
     'TMPL_PARSE_STRING'  =>	array(
-		'__PUBLIC__' => __ROOT__.'/Public', 							// 更改默认的/Public 替换规则
+		//'__PUBLIC__' => __ROOT__.'/Public', 							// 更改默认的/Public 替换规则
 		'__JS__'     => __ROOT__.'/Public/'.DEFAULT_THEME.'/js', 		// 增加新的js路径替换规则
 		'__CSS__'     => __ROOT__.'/Public/'.DEFAULT_THEME.'/css', 		// 增加新的css路径替换规则
 		'__IMAGE__'     => __ROOT__.'/Public/'.DEFAULT_THEME.'/image', 	// 增加新的image路径替换规则
