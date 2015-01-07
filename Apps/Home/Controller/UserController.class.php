@@ -28,6 +28,7 @@ class UserController extends Controller {
     				//session赋值
     				session('member_status',IS_LOGIN);
     				session('member_uid',$result['uid']);
+    				session('member_username',$result['username']);
     				$this->success('登录成功', __APP__."/index"); exit;
     			} else {
 					$this -> assign('errorinfo', array('用户名或密码错误'));
@@ -40,14 +41,13 @@ class UserController extends Controller {
 
     	layout(false);
     	$this->display('login');
- 
-
     }
     
     //用户注销
     public function logout() {
     	session(null);
         session('member_status',NOT_LOGIN);
+        session('member_username','游客');
     	$this->success('已注销', __APP__."/index"); exit;
     }
     

@@ -31,13 +31,12 @@
 	      <span class="icon-bar"></span>
 	      <span class="icon-bar"></span>
       </button>
-      <span class="navbar-brand">Futures</span>
-    </div>
+      <a class="navbar-brand" href="/futures/index/">Futures</a> </div>
     <div id="navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
         <li class="active"><a href="/futures/index/">Home</a></li>
         <li><a href="/futures/article/index?uid=<?php echo (session('member_uid')); ?>">Blog</a></li>
-        <li class="dropdown active">
+        <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="#">Action</a></li>
@@ -49,14 +48,20 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li>
-        <span style="display: block;padding:15px 15px;position: relative;  padding-top: 15px;">
-        欢迎你:<?php echo (session('member_username')); ?>
-        </span></li>
-        <li>
-        <?php if($_SESSION['member_status']== NOT_LOGIN): ?><a href="/futures/user/login">登录</a>
-        <?php else: ?>
-		<a href="/futures/user/logout">注销</a><?php endif; ?>
+        <li style="display:block">welcome</li>
+        <li><h5>欢迎你：</h5></li>
+        <li><a href="#">Default</a></li>
+        <li class="dropdown active">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li class="divider"></li>
+            <li class="dropdown-header">Nav header</li>
+            <li><a href="#">Separated link</a></li>
+            <li><a href="#">One more separated link</a></li>
+          </ul>
         </li>
       </ul>
     </div>
@@ -77,12 +82,29 @@
         <!--<button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>-->
       	
 		<!-- BEGIN PAGE -->
-			<div class="page-header col-xs-12 col-md-12">
-	  <h2>文章列表</h2>
-	</div>
-    <div class="list-group col-xs-12 col-md-12">
-    <?php if(is_array($article_list)): foreach($article_list as $key=>$detail): ?><a href="/futures/article/detail?id=<?php echo ($detail["id"]); ?>" class="list-group-item"><?php echo ($detail["title"]); ?></a><?php endforeach; endif; ?>
-	</div>
+		    <form action="" method="post">
+		<div class="page-header col-md-offset-2">
+		  <h2>添加分类</h2>
+		</div>
+	    <div class="input-group col-xs-12 col-md-6 col-md-offset-2">
+	        <span class="input-group-btn">
+	           <button type="button" class="btn btn-default">上级分类</button>
+	        </span>
+	        <select class="form-control" name="parent_id">
+	         <option value="">请选择</option>
+	         <?php echo ($select_option); ?>
+	        </select>
+        </div>
+        <br />
+        <div class="input-group col-xs-12 col-md-6 col-md-offset-2">
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default">名称</button>
+          </span>
+          <input type="text" name="name" class="form-control">
+        </div><!-- /input-group --><br />
+
+        <button type="submit" class="btn btn-default col-md-offset-2 ">保存</button>
+    </form>
 		<!-- END PAGE -->
 
     </div>

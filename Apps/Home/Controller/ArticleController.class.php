@@ -2,12 +2,73 @@
 namespace Home\Controller;
 use Think\Controller;
 class ArticleController extends Controller {
-    public function index(){
+	public function article_add(){
     	//layout(false);
-    	if($_POST){
-    		var_dump($_POST);exit;
+		if($_POST){
+    		$model_article = D('Article');
+    		$model_article->create();
+    	    $model_article->cate_id = session('member_uid');
+    	    $model_article->uid = session('member_uid');
+    	    $model_article->add_time = time();
+    	    $model_article->update_time = time();
+    		$result = $model_article->add();
+    		if( $result ){
+				$this->success('添加成功', __APP__."/article"); exit;
+    		} else {
+    			$this->error('添加失败', __APP__."/article/article_add"); exit;
+    		}
     	}
+    	$model_cate = D('Category');
+    	$select_option = $model_cate->cate_select();
+    	$this->assign('select_option',$select_option);
 		$this->show('');
     }
     
+    //文章列表
+    public function index(){
+
+    	$model_article = D('Article');
+    	$article_list = $model_article->order('add_time desc')->select();
+    	$this->assign('article_list',$article_list);
+    	$this->show('');
+    }
+    
+    //添加文章分类
+    public function cate_add(){
+    	$model_cate = D('Category');
+		if($_POST){
+    		$data = $model_cate->create();
+    		if(I('parent_id')>0){
+    			$parent_info = $model_cate->where('id='.I('parent_id'))->field('level,route')->find();
+    			$parent_level = $parent_info['level'];
+    			$parent_route = $parent_info['route'];
+    			$data['level'] = $parent_level + 1;
+    		} else {
+    			$data['level'] = 1;
+    		}
+    		
+    		if( $id = $model_cate->add($data)){
+    			if( $data['level'] == 1 ){
+    				$route['route'] = $id;
+    			} else {
+    				$route['route'] = $parent_route . '_' . $id;
+    			}
+
+    			$model_cate->where("id=$id")->save($route);
+				$this->success('添加成功', __APP__."/article/cate_list"); exit;
+    		} else {
+				$this->error('添加失败', __APP__."/article/cate_add"); exit;
+    		}
+    	}
+
+    	$select_option = $model_cate->cate_select();
+    	$this->assign('select_option',$select_option);
+		$this->show('');
+    }
+    
+    //文章分类修改
+    public function cate_update(){
+    	
+    }
+
 }
