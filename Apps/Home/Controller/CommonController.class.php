@@ -10,12 +10,26 @@ class CommonController extends Controller {
 			//status =1;未登录；
 			//status =2;已登录；
         } else {
-            $time = time();
-            session('member_status',NOT_LOGIN);
-            session('member_uid',md5($time.'uid'));
+            $this->logout();
         }
+        $this->assign('controller_name',CONTROLLER_NAME);
+    	$this->assign('action_name',ACTION_NAME);
+	}
+	
+	public function logout(){
+		session(null);
+		$time = time();
+        session('member_username','游客');
+        session('member_status',NOT_LOGIN);
 	}
 
+	public function need_login(){
+
+		if( session('member_status') != IS_LOGIN ){
+			$this->error('请登录', __APP__."/user/login"); exit;
+		}
+	}
+	
     //验证码
     function verify(){
 		$Verify = new \Think\Verify();

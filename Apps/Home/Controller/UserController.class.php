@@ -1,7 +1,7 @@
 <?php
 namespace Home\Controller;
 use Think\Controller;
-class UserController extends Controller {
+class UserController extends CommonController {
     public function index(){
 		$this->show();
     }
@@ -45,9 +45,7 @@ class UserController extends Controller {
     
     //用户注销
     public function logout() {
-    	session(null);
-        session('member_status',NOT_LOGIN);
-        session('member_username','游客');
+		parent::logout();
     	$this->success('已注销', __APP__."/index"); exit;
     }
     
