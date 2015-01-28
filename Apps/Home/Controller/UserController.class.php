@@ -39,7 +39,7 @@ class UserController extends CommonController {
     		$this -> assign('post', $_POST);
     	}
 
-    	layout(false);
+    	//layout(false);
     	$this->display('login');
     }
     

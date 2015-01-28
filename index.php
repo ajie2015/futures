@@ -21,6 +21,7 @@ define('SITE_PATH', dirname(__FILE__));
 define('APP_PATH', SITE_PATH.'/'.APP_NAME.'/');*/
 // 定义应用目录
 define('APP_PATH','./Apps/');
+
 // 引入ThinkPHP入口文件
 require './ThinkPHP/ThinkPHP.php';
 

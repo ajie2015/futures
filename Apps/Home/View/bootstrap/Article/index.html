@@ -1,4 +1,4 @@
-	<div class="page-header col-xs-12 col-md-12">
+	<!--<div class="page-header col-xs-12 col-md-12">
 	  <h2>文章列表</h2>
 	  <a href="__APP__/article/article_add" style="float:right">发表文章</a>
 	</div>
@@ -6,4 +6,20 @@
     <foreach name="article_list" item="detail" >
 	  <a href="__APP__/article/detail?id={$detail.id}" class="list-group-item">{$detail.title}</a>
 	</foreach>
-	</div>
+	</div>-->
+	
+	<div class="col-md-12 col-xs-12">
+      <table class="table">
+        <thead>
+          <tr><th>文章列表<a href="__APP__/article/article_add" style="float:right">发表文章</a></th></tr>
+        </thead>
+        <tbody>
+            <foreach name="article_list" item="detail" >
+            <tr><td><a href="__APP__/article/detail?id={$detail.id}" class="">{$detail.title}</a></td></tr>
+			</foreach>
+        </tbody>
+      </table>
+    </div>
+    
+	{$page}
+	

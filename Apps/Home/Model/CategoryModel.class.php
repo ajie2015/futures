@@ -7,20 +7,22 @@ class CategoryModel extends Model{
 	
 	//分类列表
     function cate_list(){
-    	$cate_list = $this->order('route asc')->select();
+    	$uid = session('member_uid');
+    	$cate_list = $this->where("uid='$uid'")->order('route asc')->select();
     	return $cate_list;
     }
     
-    function cate_select( $id ){
+    function cate_select( $id = '' ){
     	$cate_list = $this->cate_list();
     	$symbol = '';
+    	$option = '';
 		foreach ( $cate_list as $key => $cate ){
 			$select= '';
-			if( $id == $cate['id'] ){
+			if( isset($id) && $id == $cate['id'] ){
 				$select = 'selected="selected"';
 			}
 			$symbol = str_repeat( '----', $cate['level']-1 );
-			$option .= "<option value='{$cate[id]}' {$select} >{$symbol}{$cate[name]}</option>";
+			$option .= "<option value='{$cate['id']}' {$select} >{$symbol}{$cate['name']}</option>";
 		}
 		return $option;
     }

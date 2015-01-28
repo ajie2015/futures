@@ -4,8 +4,7 @@ use Think\Controller;
 class CommonController extends Controller {
 	
 	public function _initialize(){
-		//用户标识，memb_id或session
-        //if(isset($_SESSION['member'])){
+		//用户
         if( session('?member_status') ){
 			//status =1;未登录；
 			//status =2;已登录；
@@ -14,6 +13,22 @@ class CommonController extends Controller {
         }
         $this->assign('controller_name',CONTROLLER_NAME);
     	$this->assign('action_name',ACTION_NAME);
+    	
+    	//分页
+    	if(isset($_GET['p']) && $_GET['p']>0){
+            $_GET['p'] = intval($_GET['p']);
+        } else {
+           $_GET['p'] = 1;
+        }
+        
+        //导航搜索框
+        if( isset($_GET['keywords']) && $_GET['keywords'] !='' ){
+        	$this->keywords = trim($_GET['keywords']);
+        	
+        } else {
+        	$this->keywords = '';
+        }
+        $this->assign('keywords',$this->keywords);
 	}
 	
 	public function logout(){

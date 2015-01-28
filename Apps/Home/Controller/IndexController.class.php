@@ -3,6 +3,11 @@ namespace Home\Controller;
 use Think\Controller;
 class IndexController extends CommonController {
     public function index(){
+		$this->display();
+    }
+    public function image(){
+    	layout(false);
+
     	Vendor('ChartDirector.lib.phpchartdir');
 		//$objPHPExcel = new \PHPExcel(); 
     	//$this->display();
@@ -26,9 +31,10 @@ class IndexController extends CommonController {
 		# Set the pie data and the pie labels
 		$c->setData($data, $labels);
 		
+		ob_clean();
 		# Output the chart
-		//header("Content-type: image/png");
-		//print($c->makeChart2(PNG));
+		header("Content-type: image/png");
+		print($c->makeChart2(PNG));
 		$this->display();
     }
     

@@ -2,6 +2,10 @@
 namespace Home\Controller;
 use Think\Controller;
 class ArticleController extends CommonController {
+	function _initialize(){
+		parent::_initialize();
+		layout('layout_blog');
+	}
 	public function article_add(){
     	//layout(false);
 		if($_POST){
@@ -10,6 +14,7 @@ class ArticleController extends CommonController {
     	    $model_article->uid = session('member_uid');
     	    $model_article->add_time = time();
     	    $model_article->update_time = time();
+    	    $model_article->content = htmlspecialchars_decode(I('content'));
     		$result = $model_article->add();
     		if( $result ){
 				$this->success('添加成功', __APP__."/article"); exit;
@@ -20,8 +25,13 @@ class ArticleController extends CommonController {
     	$model_cate = D('Category');
     	$select_option = $model_cate->cate_select();
     	$action = '发表文章';
+    	$info = array(
+    		'title' =>'',
+    		'content' =>'',
+    	);
     	$this->assign('select_option',$select_option);
     	$this->assign('action',$action);
+    	$this->assign('info',$info);
 		$this->show('');
     }
     
@@ -51,10 +61,16 @@ class ArticleController extends CommonController {
     
     //文章列表
     public function index(){
+
     	parent::need_login();
     	$uid = session('member_uid');
     	$model_article = D('Article');
-    	$article_list = $model_article->where("uid='$uid'")->order('add_time desc')->select();
+    	$where = "uid='$uid'";
+    	$article_list = $model_article->where("$where")->order('add_time desc')->page($_GET['p'].',20')->select();
+    	$count      = $model_article->where("$where")->count();// 查询满足要求的总记录数
+    	$page       = new \Think\Page($count,20);
+    	$show       = $page->show();// 分页显示输出
+    	$this->assign('page',$show);// 赋值分页输出
     	$this->assign('article_list',$article_list);
     	$this->show('');
     }
@@ -84,6 +100,7 @@ class ArticleController extends CommonController {
     			$data['level'] = 1;
     		}
     		
+    		$data['uid'] = session('member_uid');
     		if( $id = $model_cate->add($data)){
     			if( $data['level'] == 1 ){
     				$route['route'] = $id;
@@ -105,6 +122,9 @@ class ArticleController extends CommonController {
     
     //文章分类修改
     public function cate_update(){
+    	
+    }
+    public function cate_list(){
     	
     }
 
