@@ -1,14 +1,10 @@
     <form action="" method="post">
-    	<div class="page-header col-xs-12 col-md-12">
-		  <h3>{$action}
-		  <p><sub><a href="__APP__/article/index" class="pull-right">返回列表</a></sub></p></h3>
+    	<div class="page-header">
+		  <h2>{$action}</h2>
 		</div>
-		<br />
-		<br />
-		<br />
 	    <div class="input-group col-md-6 col-xs-12">
 	        <span class="input-group-btn">
-	           <button type="button" class="btn btn-default">文章分类</button>
+	           <button type="button" class="btn btn-default">分类</button>
 	        </span>
 	        <select class="form-control" name="cate_id">
 	         <option value="">请选择</option>
@@ -19,18 +15,23 @@
 	        </span>
         </div>
         <br />
-        <div class="input-group  col-xs-12 col-md-8">
+        <div class="input-group  col-xs-12 col-md-6">
           <span class="input-group-btn">
             <button type="button" class="btn btn-default">标题</button>
           </span>
-          <input type="text" name="title" value="{$info.title}" class="form-control">
+          <input type="text" name="title" required value="{$info.title}" class="form-control">
+          
+        </div><!-- /input-group -->
+        <br />
+        <div class="input-group  col-xs-12 col-md-6">
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default">链接地址</button>
+          </span>
+          <input type="text" name="url"  required  value="{$info.url}" class="form-control">
+          
         </div><!-- /input-group -->
       <br />
-      
-        <!-- 加载编辑器的容器 -->
-        <script id="container" name="content" type="text/plain">{$info.content}
-        </script>
-        <br />
+
         <button type="submit" class="btn btn-default">保存</button>
     </form>
     <!-- 配置文件 -->

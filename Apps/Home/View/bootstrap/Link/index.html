@@ -1,0 +1,9 @@
+	<div class="page-header col-xs-12 col-md-12">
+	  <h3>链接列表<p><sub><a class="pull-right" href="__APP__/link/add_link">添加链接</a></p></sub></h3>
+	</div>
+    <div class="list-group col-xs-12 col-md-12">
+    <foreach name="link_list" item="detail" >
+	 	 <a href="{$detail.url}" class="list-group-item">{$detail.title}</a>
+	</foreach>
+	</div>
+	{$page}

@@ -4,11 +4,20 @@ use Think\Model;
 class CategoryModel extends Model{
 	protected $patchValidate = true;
 	protected  $_validate = array();
+	const CATE_TYPE_BLOG = 1;
+	const CATE_TYPE_LINK = 2;
+	public function type_list(){
+		$type_list = array(
+			self::CATE_TYPE_BLOG => '日志',
+			self::CATE_TYPE_LINK => '链接',
+		);
+		return $type_list;
+	}
 	
 	//分类列表
-    function cate_list(){
+    function cate_list( $type=1 ){
     	$uid = session('member_uid');
-    	$cate_list = $this->where("uid='$uid'")->order('route asc')->select();
+    	$cate_list = $this->where("uid='$uid' and type='$type'")->order('route asc')->select();
     	return $cate_list;
     }
     

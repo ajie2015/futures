@@ -1,6 +1,5 @@
 <?php
 define('DEFAULT_THEME','bootstrap');	//default,nt,media,bootstrap
-//define('__PUBLIC__',__ROOT__.'/Public');
 define('__PUBLIC__',SITE_PATH.'/Public');
 return array(
 	/** apps应用下面有home模块和admin模块

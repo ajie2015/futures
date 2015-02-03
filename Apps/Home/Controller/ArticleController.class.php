@@ -85,47 +85,5 @@ class ArticleController extends CommonController {
 			$this->error('请选择文章', __APP__."/article/index"); exit;
     	}
     }
-    
-    //添加文章分类
-    public function cate_add(){
-    	$model_cate = D('Category');
-		if($_POST){
-    		$data = $model_cate->create();
-    		if(I('parent_id')>0){
-    			$parent_info = $model_cate->where('id='.I('parent_id'))->field('level,route')->find();
-    			$parent_level = $parent_info['level'];
-    			$parent_route = $parent_info['route'];
-    			$data['level'] = $parent_level + 1;
-    		} else {
-    			$data['level'] = 1;
-    		}
-    		
-    		$data['uid'] = session('member_uid');
-    		if( $id = $model_cate->add($data)){
-    			if( $data['level'] == 1 ){
-    				$route['route'] = $id;
-    			} else {
-    				$route['route'] = $parent_route . '_' . $id;
-    			}
-
-    			$model_cate->where("id=$id")->save($route);
-				$this->success('添加成功', __APP__."/article/cate_list"); exit;
-    		} else {
-				$this->error('添加失败', __APP__."/article/cate_add"); exit;
-    		}
-    	}
-
-    	$select_option = $model_cate->cate_select();
-    	$this->assign('select_option',$select_option);
-		$this->show('');
-    }
-    
-    //文章分类修改
-    public function cate_update(){
-    	
-    }
-    public function cate_list(){
-    	
-    }
 
 }
